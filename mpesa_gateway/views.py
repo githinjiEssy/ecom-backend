@@ -18,7 +18,7 @@ def initiate_payment(request):
         return Response({"error": "product_id is required"}, status=400)
 
     product = Product.objects.get(id=product_id)
-    amount = str(product.product_price)
+    amount = product.product_price
 
     phone_number = user.phone_number
     serializer = MpesaSerializer()
@@ -52,6 +52,7 @@ def initiate_payment(request):
 
     try:
         response = requests.post(stk_push_url, json=request_data, headers=headers)
+
         mpesa_response = response.json()
 
         if mpesa_response.get("ResponseCode") == "0":
