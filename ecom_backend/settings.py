@@ -63,10 +63,22 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ecom_backend.wsgi.application'
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': config('DB_NAME'),
+        'CLIENT': {
+            'host': f'mongodb+srv://{config("MONGO_USERNAME")}:{config("MONGO_PASSWORD")}@cluster0.i5jcfgu.mongodb.net/',
+            'username': config('MONGO_USERNAME'),
+            'password': config('MONGO_PASSWORD'),
+        }
     }
 }
 

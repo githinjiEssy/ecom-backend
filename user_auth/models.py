@@ -39,7 +39,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=256, unique=True)
     phone_number = models.CharField(max_length=12, blank=True, null=True)
     password = models.CharField(max_length=128, validators=[MinLengthValidator(12)])
-    role = models.CharField(default="user")
+    role = models.CharField(max_length=10, default="user")
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_registered = models.DateTimeField(auto_now_add=True)
